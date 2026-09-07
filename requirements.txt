@@ -1,0 +1,17 @@
+# Phases 1-6 (recoverx.risk_engine, .diagnosis, .decision, .policy, .simulator,
+# .models, .database) and the Phase 7 pipeline orchestrator
+# (recoverx.api.pipeline) use only the Python standard library — no
+# dependencies needed to run those or their tests.
+#
+# Phase 7's API layer (recoverx.api.app / .routes / .schemas) additionally
+# needs the packages below. Install with:
+#
+#     pip install -r requirements.txt
+#
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27,<1.0
+pydantic>=2.5,<3.0
+httpx>=0.26,<1.0   # only needed to run tests.test_phase7_api (FastAPI TestClient)
+
+# Later phases will add sqlalchemy, psycopg2-binary, lightgbm, anthropic, etc.
+# to this file as each is actually introduced and verified.

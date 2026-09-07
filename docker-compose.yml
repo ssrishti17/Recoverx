@@ -1,0 +1,39 @@
+# RecoverX local/demo deployment.
+#
+#     docker compose up --build
+#
+# Then: backend at http://localhost:8000/docs, frontend at http://localhost:5173.
+#
+# No database or LLM service here on purpose — this build's Diagnosis and
+# Decision engines are fully deterministic/rule-based (no LLM calls), and
+# the API layer's in-memory result store (documented in
+# recoverx/api/store.py) is process-lifetime only, not backed by a database.
+# If a persistence layer is added in a future phase, its service belongs here.
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Talks to the backend service via the browser, not container-to-
+        # container, so this must be the host-reachable URL, not
+        # "http://backend:8000" (the browser can't resolve compose's
+        # internal service names).
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy
