@@ -1,15 +1,15 @@
-# RecoverX — AI Revenue Recovery Agent (Phases 1–15, complete)
+# RecoverX — AI Revenue Recovery Agent
 
-AI-powered Revenue Leak Detection & Recovery Agent (Razorpay Buildathon, Track 03).
+AI-powered Revenue Leak Detection & Recovery Agent.
 
-**Status: Phases 1–15 complete.** RecoverX runs the full
+RecoverX runs the full
 DETECT → DIAGNOSE → REASON → DECIDE → GUARD → ACT → VERIFY → MEASURE → AUDIT
 pipeline: a deterministic risk/diagnosis/decision/policy/simulation core
-(Phases 1–8), a human-in-the-loop approval workflow, analytics, a what-if
-simulator, and a synthetic-data batch evaluation (Phases 9–13), a security
-pass and Docker packaging (Phase 14), and — on top of all of that, unchanged
+, a human-in-the-loop approval workflow, analytics, a what-if
+simulator, and a synthetic-data batch evaluation , a security
+pass and Docker packaging, and — on top of all of that, unchanged
 — an AI reasoning agent, explicit guardrails, explainability, and an audit
-timeline (Phase 15). See the "Phase 15" section below for the newest layer,
+timeline. See the "Phase 15" section below for the newest layer,
 and each phase's own section for how it was built incrementally.
 
 This README is written phase-by-phase, in the order the project was actually
